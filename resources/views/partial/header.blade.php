@@ -17,7 +17,8 @@
 
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ Storage::url(Auth::user()->photo_profile) }}" alt="Profile" class="rounded-circle">
+                    <img src="{{ asset(Auth::user()->photo_profile ? 'photo_profile/' . Auth::user()->photo_profile : 'photo_profile/default-photo.png') }}"
+                        alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->username }}</span>
                 </a>
 

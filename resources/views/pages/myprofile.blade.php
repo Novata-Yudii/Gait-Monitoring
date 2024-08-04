@@ -16,9 +16,10 @@
             <div class="col-xl-4">
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <img src="{{ Storage::url(Auth::user()->photo_profile) }}" alt="Profile" class="rounded-circle">
+                        <img src="{{ asset(Auth::user()->photo_profile ? 'photo_profile/' . Auth::user()->photo_profile : 'photo_profile/default-photo.png') }}"
+                            alt="Profile" class="rounded-circle">
                         <h2>{{ Auth::user()->name }}</h2>
-                        <h3>{{ Auth::user()->role }}</h3>
+                        <h3>{{ $personaldata ? $personaldata->fullname : Auth::user()->username }}</h3>
                         <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -56,68 +57,63 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
                                     <div class="col-lg-9 col-md-8">
-                                        {{ $personaldata ? $personaldata->fullname : 'Mantap jiwa' }}
+                                        {{ $personaldata ? $personaldata->fullname : 'Perlu di atur' }}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Company</div>
                                     <div class="col-lg-9 col-md-8">
-                                        {{ $personaldata ? $personaldata->company : 'UGM Bosku' }}</div>
+                                        {{ $personaldata ? $personaldata->company : 'Perlu di atur' }}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Spesialis</div>
                                     <div class="col-lg-9 col-md-8">
-                                        {{ $personaldata ? $personaldata->spesialis : 'Spesialis Bosku' }}
+                                        {{ $personaldata ? $personaldata->spesialis : 'Perlu di atur' }}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Country</div>
                                     <div class="col-lg-9 col-md-8">
-                                        {{ $personaldata ? $personaldata->country : 'Country Bosku' }}
+                                        {{ $personaldata ? $personaldata->country : 'Perlu di atur' }}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Address</div>
                                     <div class="col-lg-9 col-md-8">
-                                        {{ $personaldata ? $personaldata->addres : 'Address Bosku' }}
+                                        {{ $personaldata ? $personaldata->addres : 'Perlu di atur' }}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Phone</div>
                                     <div class="col-lg-9 col-md-8">
-                                        {{ $personaldata ? $personaldata->phone : 'Phone Bosku' }}
+                                        {{ $personaldata ? $personaldata->phone : 'Perlu di atur' }}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Email</div>
                                     <div class="col-lg-9 col-md-8">
-                                        {{ Auth::user()->email ? Auth::user()->email : 'Email Bosku' }}
+                                        {{ Auth::user()->email ? Auth::user()->email : 'Perlu di atur' }}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                                <form method="POST" action="/myprofile">
+                                <form method="POST" action="/myprofile" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="row mb-3">
-                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
-                                            Image
+                                        <label class="col-md-4 col-lg-3 col-form-label">Photo Profile
                                         </label>
                                         <div class="col-md-8 col-lg-9">
-                                            <img src="{{ Storage::url(Auth::user()->photo_profile) }}" alt="Profile">
-                                            <div class="pt-2">
-                                                <a href="#" class="btn btn-primary btn-sm"
-                                                    title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                <a href="#" class="btn btn-danger btn-sm"
-                                                    title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                                            </div>
+                                            <img src="{{ asset(Auth::user()->photo_profile ? 'photo_profile/' . Auth::user()->photo_profile : 'photo_profile/default-photo.png') }}"
+                                                alt="Profile">
+                                            <input type="file" name="photo_profile" class="form-control">
                                         </div>
                                     </div>
 
@@ -125,7 +121,7 @@
                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="fullname" type="text" class="form-control" id="fullName"
-                                                value="{{ $personaldata ? $personaldata->fullname : 'Fullname Bosku' }}">
+                                                value="{{ $personaldata ? $personaldata->fullname : '' }}">
                                         </div>
                                     </div>
 
@@ -133,15 +129,15 @@
                                         <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="company" type="text" class="form-control" id="company"
-                                                value="{{ $personaldata ? $personaldata->company : 'UGM Bosku' }}">
+                                                value="{{ $personaldata ? $personaldata->company : '' }}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                                        <label for="Job" class="col-md-4 col-lg-3 col-form-label">Spesialis</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="spesialis" type="text" class="form-control" id="Job"
-                                                value="{{ $personaldata ? $personaldata->spesialis : 'Spesialis Bosku' }}">
+                                                value="{{ $personaldata ? $personaldata->spesialis : '' }}">
                                         </div>
                                     </div>
 
@@ -149,15 +145,15 @@
                                         <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="country" type="text" class="form-control" id="Country"
-                                                value="{{ $personaldata ? $personaldata->country : 'Country Bosku' }}">
+                                                value="{{ $personaldata ? $personaldata->country : '' }}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="address" type="text" class="form-control" id="Address"
-                                                value="{{ $personaldata ? $personaldata->addres : 'Address Bosku' }}">
+                                            <input name="addres" type="text" class="form-control" id="Address"
+                                                value="{{ $personaldata ? $personaldata->addres : '' }}">
                                         </div>
                                     </div>
 
@@ -165,7 +161,7 @@
                                         <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="phone" type="text" class="form-control" id="Phone"
-                                                value="{{ $personaldata ? $personaldata->phone : 'Phone Bosku' }}">
+                                                value="{{ $personaldata ? $personaldata->phone : '' }}">
                                         </div>
                                     </div>
 
@@ -173,7 +169,7 @@
                                         <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="email" type="email" class="form-control" id="Email"
-                                                value="{{ Auth::user()->email ? Auth::user()->email : 'Email Bosku' }}">
+                                                value="{{ Auth::user()->email ? Auth::user()->email : '' }}">
                                         </div>
                                     </div>
 
