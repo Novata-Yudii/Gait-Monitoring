@@ -14,3 +14,4 @@ Route::get('/logout', [AuthController::class,'logout'])->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/myprofile', [MyProfileController::class, 'index'])->middleware('auth');
+Route::put('/myprofile', [MyProfileController::class, 'update'])->middleware('auth');

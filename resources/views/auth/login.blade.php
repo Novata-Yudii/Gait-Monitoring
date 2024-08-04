@@ -63,7 +63,7 @@
                                         @endsession
                                     </div>
 
-                                    <form class="row g-3 needs-validation" method="post" action="{{ url('/login') }}">
+                                    <form class="row g-3 needs-validation" method="POST" action="{{ url('/login') }}">
                                         @csrf
                                         <div class="col-12">
                                             <label for="yourEmail" class="form-label">Email</label>

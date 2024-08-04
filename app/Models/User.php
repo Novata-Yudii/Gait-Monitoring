@@ -12,9 +12,10 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'role',
         'photo_profile'
     ];
 
@@ -29,5 +30,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function personaldata()
+    {
+        return $this->hasOne(PersonalData::class);
     }
 }

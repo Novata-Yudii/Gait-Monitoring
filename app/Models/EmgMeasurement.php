@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Angle_Measurement extends Model
+class EmgMeasurement extends Model
 {
     use HasFactory;
 
-    protected $table = 'angle_measurements';
+    protected $table = 'emg_measurements';
 
     protected $fillable = [
         'patienId',
         'doctorId',
-        'leftHip',
-        'rightHip',
-        'leftKnee',
-        'rightKnee',
-        'leftAnkle',
-        'rightAnkle'
+        'emg1',
+        'emg2',
+        'emg3',
+        'emg4'
     ];
 }
