@@ -34,6 +34,11 @@ class MyProfileController extends Controller
                 $ekstension_file = $photo_file->extension();
                 $photo_profile = date('ymdhis').'.'.$ekstension_file;
                 $photo_file->move(public_path('photo_profile'), $photo_profile);
+            }else{
+                $photo_file = $request->file('photo_profile');
+                $ekstension_file = $photo_file->extension();
+                $photo_profile = date('ymdhis').'.'.$ekstension_file;
+                $photo_file->move(public_path('photo_profile'), $photo_profile);
             }
             User::where('id', Auth::user()->id)
                 ->update([
