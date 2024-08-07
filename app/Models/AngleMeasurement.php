@@ -12,8 +12,7 @@ class AngleMeasurement extends Model
     protected $table = 'angle_measurements';
 
     protected $fillable = [
-        'patienId',
-        'doctorId',
+        'patient_id',
         'leftHip',
         'rightHip',
         'leftKnee',
@@ -21,4 +20,9 @@ class AngleMeasurement extends Model
         'leftAnkle',
         'rightAnkle'
     ];
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }

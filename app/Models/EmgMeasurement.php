@@ -12,11 +12,15 @@ class EmgMeasurement extends Model
     protected $table = 'emg_measurements';
 
     protected $fillable = [
-        'patienId',
-        'doctorId',
+        'patient_id',
         'emg1',
         'emg2',
         'emg3',
         'emg4'
     ];
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }

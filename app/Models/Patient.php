@@ -10,7 +10,7 @@ class Patient extends Model
     use HasFactory;
 
     protected $fillable = [
-        'doctorId',
+        'user_id',
         'name',
         'age',
         'gender',
@@ -21,4 +21,17 @@ class Patient extends Model
         'timer',
         'speed'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function anglemeasurement(){
+        return $this->hasMany(AngleMeasurement::class);
+    }
+
+    public function emgmeasurement(){
+        return $this->hasMany(EmgMeasurement::class);
+    }
 }

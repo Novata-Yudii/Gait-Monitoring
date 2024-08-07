@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('emg_measurements', function (Blueprint $table) {
             $table->id();
-            $table->integer('patienId');
-            $table->integer('doctorId');
+            $table->unsignedBigInteger('patient_id');
+            $table->foreign('patient_id')->references('id')->on('patients');
             $table->string('emg1');
             $table->string('emg2');
             $table->string('emg3');
