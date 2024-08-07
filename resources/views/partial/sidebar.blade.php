@@ -33,19 +33,5 @@
                 <span>Patients</span>
             </a>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Tabel EMG</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-contact.html">
-                <i class="bi bi-envelope"></i>
-                <span>Tabel Angle</span>
-            </a>
-        </li>
     </ul>
 </aside>
